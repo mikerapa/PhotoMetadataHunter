@@ -4,24 +4,22 @@ import (
 	"testing"
 )
 
-func TestIsMediaFile2(t *testing.T) {
-	t.Error("fail")
-}
-
 func TestIsMediaFile(t *testing.T) {
-	type args struct {
-		filePath string
-	}
+	// Supported media ".gif", ".jpeg", ".png"
 	tests := []struct {
 		name string
-		args args
+		path string
 		want bool
 	}{
-		// TODO: Add test cases.
+		{name: "jpg", path: "c:\\temp\\otherdir\\hang.jpg", want: true},
+		{name: "JPG in caps", path: "c:\\temp\\thingy.JPG", want: true},
+		{name: "png", path: "c:\\temp\\thingy.png", want: true},
+		{name: "gif", path: "c:\\temp\\thingy.gif", want: true},
+		{name: "xps", path: "c:\\temp\\thingy.xps", want: false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := IsMediaFile(tt.args.filePath); got != tt.want {
+			if got := IsMediaFile(tt.path); got != tt.want {
 				t.Errorf("IsMediaFile() = %v, want %v", got, tt.want)
 			}
 		})
