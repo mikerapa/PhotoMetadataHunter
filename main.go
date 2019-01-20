@@ -1,13 +1,16 @@
 package main
 
 import (
-	"PhotoMetadataHunter/cli"
-	"PhotoMetadataHunter/logging"
-	_ "PhotoMetadataHunter/logging"
-	"PhotoMetadataHunter/media"
-	"github.com/sirupsen/logrus"
+	//"PhotoMetadataHunter/cli"
+	//"PhotoMetadataHunter/logging"
+	//_ "PhotoMetadataHunter/logging"
+	//"PhotoMetadataHunter/media"
+	logrus "github.com/sirupsen/logrus"
 	"os"
 	"path/filepath"
+	"./cli"
+	"./logging"
+	"./media"
 )
 
 var log logrus.Logger
