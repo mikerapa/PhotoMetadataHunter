@@ -1,13 +1,7 @@
 package main
 
 import (
-	//"PhotoMetadataHunter/cli"
-	//"PhotoMetadataHunter/logging"
-	//_ "PhotoMetadataHunter/logging"
-	//"PhotoMetadataHunter/media"
-
-	"./cli"
-	"./logging"
+	cli "./cli"
 	"./media"
 	logrus "github.com/sirupsen/logrus"
 )
@@ -18,7 +12,7 @@ var log logrus.Logger
 func main() {
 
 	path, consoleLogLevel := cli.ParseArgs()
-	log = logging.GetLogger(logging.GetLogLevelFromString(consoleLogLevel))
+	log = cli.GetLogger(cli.GetLogLevelFromString(consoleLogLevel))
 	log.Info("Path:", path, "Console Log Level:", consoleLogLevel)
 	log.Trace("Looking for files")
 	//findFiles(path)
@@ -32,15 +26,3 @@ func main() {
 	}
 
 }
-
-// func findFiles(searchPath string) {
-// 	var fileList []string
-// 	filepath.Walk(searchPath, func(path string, info os.FileInfo, err error) error {
-// 		if media.IsMediaFile(path) {
-// 			log.Info("Found file:", path)
-// 			fileList = append(fileList, path)
-// 		}
-
-// 		return nil
-// 	})
-// }

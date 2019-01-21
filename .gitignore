@@ -14,3 +14,7 @@
 
 # ignore the src folder
 src/
+
+# ignore all vs code and goland files
+.vscode/
+.idea/

@@ -1,4 +1,4 @@
-package logging
+package cli
 
 import (
 	"bytes"
@@ -17,9 +17,7 @@ type myFormatter struct {
 func (f *myFormatter) Format(entry *logrus.Entry) ([]byte, error) {
 	formattedLogEntry := fmt.Sprintln(entry.Time.Format(dateTimeFormat), strings.ToUpper(entry.Level.String()), "-", entry.Message)
 	byteBuffer := &bytes.Buffer{}
-	byteBuffer.WriteString(fmt.Sprintf("\x1b[%dm", getColorByLogLevel(entry.Level)))
 	byteBuffer.WriteString(formattedLogEntry)
-	byteBuffer.WriteString("\x1b[0m")
 	return byteBuffer.Bytes(), nil
 
 }
