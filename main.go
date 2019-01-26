@@ -6,24 +6,27 @@ import (
 	logrus "github.com/sirupsen/logrus"
 )
 
-var log logrus.Logger
+//Logger
+var ConsoleLogger logrus.Logger
 
 // Application Entry Point
 func main() {
 
 	path, consoleLogLevel := cli.ParseArgs()
-	log = cli.GetLogger(cli.GetLogLevelFromString(consoleLogLevel))
-	log.Info("Path:", path, " Console Log Level:", consoleLogLevel)
-	log.Trace("Looking for files")
+	ConsoleLogger = cli.GetLogger(cli.GetLogLevelFromString(consoleLogLevel))
+	media.ConsoleLogger = ConsoleLogger
+	cli.ConsoleLogger = ConsoleLogger
+	ConsoleLogger.Info("Path:", path, " Console Log Level:", consoleLogLevel)
+	ConsoleLogger.Trace("Looking for files")
 	// set up the channels
 	foundFiles := make(chan string)
 
-	go media.FindFilesAsync(path, foundFiles, log)
+	go media.FindFilesAsync(path, foundFiles)
 	// media.GetMediaMetaData(<-foundFiles, log)
 
 	for f := range foundFiles {
-		log.Trace("Ready to process file", f)
-		mediaMetaData := media.GetMediaMetaData(f, log)
+		ConsoleLogger.Trace("Ready to process file", f)
+		mediaMetaData := media.GetMediaMetaData(f)
 		cli.DisplayFileMetaData(f, mediaMetaData)
 
 	}

@@ -10,6 +10,9 @@ import (
 
 const dateTimeFormat = "2 Jan 2006 15:04:05"
 
+//Logger
+var ConsoleLogger logrus.Logger
+
 type myFormatter struct {
 	logrus.TextFormatter
 }
