@@ -44,7 +44,7 @@ func GetMediaMetaData(filePath string, consoleLogger logrus.Logger) (metaData ma
 		consoleLogger.Error(err)
 	} else {
 		metaData = extractMetaData(f)
-		consoleLogger.Info(metaData)
+		consoleLogger.Info("Metadata:", metaData)
 	}
 	f.Close()
 	return

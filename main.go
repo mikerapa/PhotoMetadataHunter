@@ -13,16 +13,19 @@ func main() {
 
 	path, consoleLogLevel := cli.ParseArgs()
 	log = cli.GetLogger(cli.GetLogLevelFromString(consoleLogLevel))
-	log.Info("Path:", path, "Console Log Level:", consoleLogLevel)
+	log.Info("Path:", path, " Console Log Level:", consoleLogLevel)
 	log.Trace("Looking for files")
-	//findFiles(path)
+	// set up the channels
 	foundFiles := make(chan string)
+
 	go media.FindFilesAsync(path, foundFiles, log)
 	// media.GetMediaMetaData(<-foundFiles, log)
 
 	for f := range foundFiles {
 		log.Trace("Ready to process file", f)
-		media.GetMediaMetaData(f, log)
+		mediaMetaData := media.GetMediaMetaData(f, log)
+		cli.DisplayFileMetaData(f, mediaMetaData)
+
 	}
 
 }
