@@ -3,6 +3,7 @@ package cli
 import (
 	"fmt"
 	"gopkg.in/gookit/color.v1"
+	"strings"
 )
 
 func DisplayFileMetaData(fileName string, fileMetaData map[string]string) {
@@ -15,9 +16,17 @@ func DisplayFileMetaData(fileName string, fileMetaData map[string]string) {
 			color.White.Print(", ")
 		}
 		firstProperty = false
-		color.Yellow.Print(k)
+		color.Yellow.Print(strings.TrimSpace(k))
+		//color.Red.Print("(len=", len(v), ")")
+		//color.Red.Print("(lenTrim=", len(strings.TrimSpace(v)), ")")
+		//for _,r:= range v {color.White.Print(r, ",")}
 		color.White.Print("=")
-		color.White.Print(v)
+		color.White.Print(trimValue(v))
 	}
 	fmt.Print("\n")
+}
+
+func trimValue(valueString string) (returnValue string) {
+	returnValue = strings.TrimSpace(strings.Trim(valueString, "\t"))
+	return
 }

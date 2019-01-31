@@ -48,7 +48,11 @@ func GetLogLevelFromString(logLevelString string) logrus.Level {
 		return logrus.InfoLevel
 	case "trace":
 		return logrus.TraceLevel
-	default:
+	case "debug":
+		return logrus.DebugLevel
+	case "error":
 		return logrus.ErrorLevel
+	default:
+		return logrus.FatalLevel
 	}
 }

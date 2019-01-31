@@ -28,12 +28,10 @@ func extractMetaData(file *os.File) (metaData map[string]string) {
 	for _, field := range fieldExtractionList {
 		fieldValue := extractField(field, decodedData)
 		if len(fieldValue) > 0 {
-			metaData[string(field)] = fieldValue
+			metaData[string(field)] = strings.TrimSpace(fieldValue)
 		}
 	}
 
-	// metaData["UserComment"] = extractField(exif.UserComment, decodedData)
-	// metaData["ImageDescription"] = extractField(exif.ImageDescription, decodedData)
 	return
 }
 
@@ -45,7 +43,7 @@ func extractField(field exif.FieldName, decodedExif *exif.Exif) (returnValue str
 	}
 	//tagValue, _ := decodedExif.Get(exif.UserComment)
 	if tagValue != nil {
-		returnValue = tagValue.String()
+		returnValue = strings.TrimSpace(tagValue.String())
 	}
 	return
 }
