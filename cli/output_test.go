@@ -23,21 +23,3 @@ func Test_trimValue(t *testing.T) {
 		})
 	}
 }
-
-func TestDisplayFileMetaData(t *testing.T) {
-	type args struct {
-		fileName     string
-		fileMetaData map[string]string
-	}
-	tests := []struct {
-		name string
-		args args
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			DisplayFileMetaData(tt.args.fileName, tt.args.fileMetaData)
-		})
-	}
-}

@@ -1,12 +1,10 @@
 package media
 
 import (
+	"github.com/sirupsen/logrus"
 	"os"
 	"path/filepath"
 	"strings"
-	"time"
-
-	"github.com/sirupsen/logrus"
 )
 
 //Logger
@@ -40,7 +38,6 @@ func FindFilesAsync(searchPath string, foundFilesChan chan string) {
 // GetMediaMetaData - opens a file to extract metadata
 func GetMediaMetaData(filePath string) (metaData map[string]string) {
 	ConsoleLogger.Trace("GetMediaMetaData:", filePath)
-	time.Sleep(100 * time.Millisecond) // TODO Remove this
 
 	f, err := os.Open(filePath)
 	if err != nil {
