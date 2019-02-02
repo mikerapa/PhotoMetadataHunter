@@ -17,9 +17,6 @@ func DisplayFileMetaData(fileName string, fileMetaData map[string]string) {
 		}
 		firstProperty = false
 		color.Yellow.Print(strings.TrimSpace(k))
-		//color.Red.Print("(len=", len(v), ")")
-		//color.Red.Print("(lenTrim=", len(strings.TrimSpace(v)), ")")
-		//for _,r:= range v {color.White.Print(r, ",")}
 		color.White.Print("=")
 		color.White.Print(trimValue(v))
 	}

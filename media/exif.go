@@ -8,7 +8,7 @@ import (
 )
 
 func extractMetaData(file *os.File) (metaData map[string]string) {
-	fieldExtractionList := [...]exif.FieldName{exif.ImageDescription, exif.UserComment}
+	fieldExtractionList := [...]exif.FieldName{exif.ImageDescription, exif.UserComment, exif.Artist, exif.MakerNote}
 	metaData = make(map[string]string)
 	decodedData, err := exif.Decode(file)
 
@@ -24,6 +24,9 @@ func extractMetaData(file *os.File) (metaData map[string]string) {
 
 		return
 	}
+
+	j, _ := decodedData.MarshalJSON()
+	ConsoleLogger.Info("Json:", string(j))
 
 	for _, field := range fieldExtractionList {
 		fieldValue := extractField(field, decodedData)
